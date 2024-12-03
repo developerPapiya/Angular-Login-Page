@@ -1,0 +1,64 @@
+<form #loginForm="ngForm" >
+
+    <div id="container">
+      <div id="input-container">
+        <div class="input">
+          <label for="username">Username*</label>
+          <input type="text"
+           placeholder="Enter username" 
+            name="userName" 
+            [(ngModel)]="loginObj.userName" 
+            #username="ngModel"
+            required
+            pattern="[a-zA-Z]{11}" />
+
+        <!-- Validation Errors -->
+        <div *ngIf="username.invalid && username.touched">
+            <span *ngIf="username.errors?.required">Username is required.</span>
+            <span *ngIf="username.errors?.pattern">
+              Username must be alphabetic and exactly 11 characters long.
+            </span>
+          </div>
+      </div>
+  
+        <div class="input">
+            <label for="email">Email*</label>
+            <input type="text"
+             placeholder="Enter email" 
+             name="email" 
+             [(ngModel)]="loginObj.email"
+             #email="ngModel"
+             required
+             email
+             />
+             <!-- validations Email -->
+              <div *ngIf="email.invalid && email.touched">
+                <span *ngIf="email.errors?.required">Email is required</span>
+                <span *ngIf="email.errors?.email">invalid email format.</span>
+              </div>
+            </div>
+              
+        <div class="input">
+          <label for="password">Password*</label>
+          <input type="password" 
+          placeholder="Enter password" 
+          name="password" 
+          [(ngModel)]="loginObj.password"
+          #password="ngModel"
+          required
+          pattern=".{8}" />
+           <!-- Validation Errors -->
+            <div *ngIf="password.invalid && password.touched">
+             <span *ngIf="password.errors?.required">Password is required</span> 
+             <span *ngIf="password.errors?.pattern">
+                Password must be exactly 8 characters long.
+             </span>   
+            </div>
+        </div>
+     
+    </div>
+      <div id="login-container">
+        <button (click)="onSubmit()"  [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </div>
+  </form>
